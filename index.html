@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>E.O.G.P.F.D.E</title>
+		<link rel="shortcut icon" href="glbe.ico" />
+		
+		<style>
+			label
+			{
+				color: white; 
+				padding: 4px;
+			}
+			body
+			{
+				background-image: url("background.png");
+				background-size: cover;
+			}
+			input
+			{
+				width: 10em;
+				margin: 3px;
+			}
+			input[type=submit]
+			{
+				width: 10.6em;
+				text-align: center;
+				margin: 3px;
+			}
+			form 
+			{
+				box-shadow: 10px 10px;
+				background-color: black;
+				margin: 5;
+				padding: 2;
+				border-style: double; 
+				border-color: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+			#info
+			{
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<form submit="javascript:Submit()">
+			<label for="login">Login:</label><span id="info"></span><br>
+			<input type="text" id="login"><br>
+			<label for="pass">Password:</label><br>
+			<input type="password" id="pass"><br>
+			<input type="Submit" value="Enter">
+		</form>
+		
+		<script>
+			function reqListener()
+			{
+				if(this.responseText.split(",")[0] == "false")
+				{
+					$("#info").text("Invalid credentials.").show().fadeOut(1000);
+					alert(this.responseText.split(",")[1]);
+				} else 
+				{
+					$("#info").text("Fail.").show().fadeOut(1000);
+				}
+			}
+		
+			$("form").submit(function( event ) {
+				var oReq = new XMLHttpRequest();
+				oReq.onload = reqListener;
+				oReq.open("get", "https://eogpfde.glitch.me/?user=" + $("#login").val() + "&pass=" + $("#pass").val(), true);
+				oReq.send();
+				event.preventDefault();
+			});
+		</script>
+	</body>
+</html>
